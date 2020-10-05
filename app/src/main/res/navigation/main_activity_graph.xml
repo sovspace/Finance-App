@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainActivityGraph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.financeapp.views.HomeFragment"
+        android:label="Your balance"
+        tools:layout="@layout/home_fragment"/>
+
+    <fragment
+        android:id="@+id/balanceHistoryFragment"
+        android:name="com.financeapp.views.BalanceHistoryFragment"
+        android:label="Your history"
+        tools:layout="@layout/balance_history_fragment"/>
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.financeapp.views.SettingsFragment"
+        android:label="Setings"
+        tools:layout="@layout/settings_fragment"/>
+
+    <fragment
+        android:id="@+id/buyStocksFragment"
+        android:name="com.financeapp.views.BuyStocksFragment"
+        android:label="Buy stock"
+        tools:layout="@layout/buy_stocks_fragment"/>
+    <fragment
+        android:id="@+id/stocksFragment"
+        android:name="com.financeapp.views.StocksFragment"
+        android:label="Search stocks"
+        tools:layout="@layout/stocks_fragment"/>
+
+
+</navigation>

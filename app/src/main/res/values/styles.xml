@@ -1,0 +1,33 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="Theme.Finance" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
+        <item name="colorAccent">@color/secondaryColor</item>
+        <item name="editTextColor">@color/primaryTextColor</item>
+    </style>
+
+
+    <style name="Widget.Finance.Button" parent="Widget.MaterialComponents.Button">
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="backgroundTint">?attr/colorPrimaryDark</item>
+    </style>
+
+    <style name="Widget.Finance.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="hintTextAppearance">@style/TextAppearance.Finance.TextInputLayout.HintText</item>
+        <item name="hintTextColor">@color/primaryTextColor</item>
+        <item name="boxStrokeColor">@color/secondaryLightColor</item>
+    </style>
+
+    <style name="TextAppearance.Finance.TextInputLayout.HintText" parent="TextAppearance.MaterialComponents.Subtitle2">
+        <item name="android:textColor">@color/primaryTextColor</item>
+    </style>
+
+
+    <style name="Theme.Finance.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
+
+    <style name="Theme.Finance.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />
+
+
+</resources>

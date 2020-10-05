@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/launchActivityNavigationGraph"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/navSplashScreenFragment">
+
+
+    <fragment
+        android:id="@+id/navSplashScreenFragment"
+        android:name="com.financeapp.views.SplashScreenFragment"
+        android:label="SplashScreenFragment"
+        tools:layout="@layout/splash_screen_fragment" >
+        <action
+            android:id="@+id/action_navSplashScreenFragment_to_navLoginFragment"
+            app:destination="@id/navLoginFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/navLoginFragment"
+        android:name="com.financeapp.views.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/login_fragment" >
+        <action
+            android:id="@+id/action_navLoginFragment_to_navSignUpFragment"
+            app:destination="@id/navSignUpFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/navSignUpFragment"
+        android:name="com.financeapp.views.SignUpFragment"
+        android:label="SignUpFragment"
+        tools:layout="@layout/sign_up_fragment">
+        <action
+            android:id="@+id/action_navSignUpFragment_to_navLoginFragment"
+            app:destination="@+id/navLoginFragment" />
+    </fragment>
+
+</navigation>

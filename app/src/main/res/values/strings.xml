@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">FinanceApp</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="logInButton">LogIn</string>
+    <string name="signUpButton">SignUp</string>
+
+    <string name="signUpText">Don\'t have account? Create it!</string>
+
+    <string name="passwordEntry">Password</string>
+    <string name="loginEntry">Login</string>
+    <string name="emailEntry">Email</string>
+    <string name="title_activity_user">UserActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="nav_bar_balance_history">Balance history</string>
+    <string name="nav_bar_home">Home</string>
+    <string name="nav_bar_teams">Teams</string>
+    <string name="nav_bar_buy_stocks">Buy stocks</string>
+    <string name="nav_bar_settings">Settings</string>
+    <string name="balance_history">Balance history</string>
+    <string name="change_avatar">Change avatar</string>
+    <string name="change_password">Change password</string>
+    <string name="current_password">Current password</string>
+    <string name="new_password">New password</string>
+    <string name="change">Change</string>
+    <string name="nav_bar_stocks">Stocks</string>
+    <string name="stock">Stock</string>
+    <string name="find">Find</string>
+    <string name="title_activity_splash_screen">SplashScreen</string>
+    <string name="buy_stock">Buy stock</string>
+    <string name="buy">Buy</string>
+    <string name="stock_symbol">Stock symbol</string>
+    <string name="amount">Amount</string>
+    <string name="refill">Refill</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+
+</resources>
