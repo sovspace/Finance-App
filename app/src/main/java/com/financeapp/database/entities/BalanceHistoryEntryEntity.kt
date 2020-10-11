@@ -7,7 +7,7 @@ import java.sql.Date
 
 @Entity(tableName = "balance_history_entry")
 class BalanceHistoryEntryEntity (
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     val id: Int,
 
     @ColumnInfo(name = "type")
@@ -20,5 +20,9 @@ class BalanceHistoryEntryEntity (
     val stockName: Double,
 
     @ColumnInfo(name = "operation_time")
-    val operationTime: Date
+    val operationTime: Date,
+
+    @ColumnInfo(name = "history_balance_id")
+    val balanceId: Int
+
 )

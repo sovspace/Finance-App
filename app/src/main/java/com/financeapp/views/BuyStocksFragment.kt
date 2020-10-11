@@ -1,10 +1,12 @@
 package com.financeapp.views
 
 import android.content.Context
+import android.opengl.Visibility
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.core.widget.ContentLoadingProgressBar
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -50,7 +52,7 @@ class BuyStocksFragment : Fragment(){
         viewModel.getResponse().observe(viewLifecycleOwner){
             if(!it.isHandled) {
                 when (it.status) {
-                    Resource.Status.LOADING -> progressBar.show()
+                    Resource.Status.LOADING -> progressBar.visibility = ProgressBar.VISIBLE
                     Resource.Status.ERROR -> {
                         progressBar.hide()
                         Toasty.error(requireContext(), it.getMessage() as String).show()

@@ -6,5 +6,5 @@ import java.util.*
 
 data class LastUpdatedRequest(
     @SerializedName("last_updated")
-    var lastUpdated: Date
+    var lastUpdated: Date?
 )

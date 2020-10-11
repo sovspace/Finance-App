@@ -11,7 +11,6 @@ import com.anychart.enums.Anchor
 import com.anychart.enums.MarkerType
 import com.anychart.enums.ScaleStackMode
 import com.anychart.enums.TooltipPositionMode
-import com.financeapp.repositories.AuthenticatedRepository
 import com.financeapp.dataentries.StockHistoryDataEntry
 import com.financeapp.models.StockInfo
 import com.financeapp.dataentries.StockPredictionDataEntry

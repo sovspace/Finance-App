@@ -1,16 +1,19 @@
 package com.financeapp.database.entities
 
 import androidx.room.Embedded
+import androidx.room.Entity
 import androidx.room.Relation
 
-class BalanceHistoryEntity (
+
+@Entity
+class BalanceStocksEntity(
     @Embedded
     val balance: BalanceEntity,
 
     @Relation(
         parentColumn = "balance_id",
-        entityColumn = "history_balance_id"
+        entityColumn = "stock_balance_id"
     )
 
-    val history: List<BalanceHistoryEntryEntity>
+    val stocks: List<BalanceStocksEntity>
 )

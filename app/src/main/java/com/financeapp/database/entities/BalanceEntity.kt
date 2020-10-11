@@ -8,14 +8,16 @@ import java.util.*
 
 @Entity(tableName = "balance")
 data class BalanceEntity(
-    @PrimaryKey
+
+    @ColumnInfo(name = "balance_id")
+    @PrimaryKey(autoGenerate = true)
     val id: Int,
 
     @ColumnInfo(name = "amount")
     val amount: Double,
 
-    @ColumnInfo(name = "currency")
-    val currency: Currency,
+//    @ColumnInfo(name = "currency")
+//    val currency: Currency,
 
     @ColumnInfo(name = "last_updated")
     val lastUpdated: Date

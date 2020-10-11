@@ -29,13 +29,13 @@ private object RestRoutes {
 
 
 interface ActionsService {
-    @GET(RestRoutes.GET_BALANCE)
+    @PUT(RestRoutes.GET_BALANCE)
     suspend fun getBalance(@Body lastUpdatedRequest: LastUpdatedRequest): Response<Balance>
 
-    @GET(RestRoutes.GET_BALANCE_HISTORY)
+    @PUT(RestRoutes.GET_BALANCE_HISTORY)
     suspend fun getHistory(@Body lastUpdatedRequest: LastUpdatedRequest): Response<List<BalanceHistoryEntry>>
 
-    @GET(RestRoutes.USER_INFO)
+    @PUT(RestRoutes.USER_INFO)
     suspend fun getUserInfo(@Body lastUpdatedRequest: LastUpdatedRequest): Response<User>
 
     @GET(RestRoutes.STOCK_INFO + "/{stock_symbol}")
@@ -67,7 +67,6 @@ interface AuthenticationService {
 
     @POST(RestRoutes.LOGIN)
     suspend fun logIn(@Body loginRequest: LoginRequest): Response<LoginResponse>
-
 
     @GET(RestRoutes.AUTHENTICATE_USER + "/{token}")
     suspend fun authenticateUser(@Path("token") token: String): Response<Unit>

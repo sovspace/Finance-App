@@ -48,7 +48,8 @@ class SettingsFragment : Fragment() {
         val token = preferences.getString(SharedPreferencesInfo.tokenName, "")
 
         settingsViewModel =
-            ViewModelProvider(requireActivity(),
+            ViewModelProvider(
+                requireActivity(),
                 TokenViewModelFactory(token as String)
             ).get(
                 SettingsViewModel::class.java
@@ -109,14 +110,6 @@ class SettingsFragment : Fragment() {
                     val emailTextView: TextView = view.findViewById(R.id.emailText)
                     emailTextView.text = it.getData()?.userInfo?.email ?: "No email"
 
-                    val birthDateTextView: TextView = view.findViewById(R.id.birthDateText)
-
-//                    if (it.getData()?.userInfo?.birthDate != null) {
-//                        val formatter = SimpleDateFormat("yyyy-MM-dd", getDefault())
-//                        birthDateTextView.text = formatter.format(it.getData()?.userInfo?.birthDate as Date)
-//                    } else {
-//                        birthDateTextView.text = "No birth date"
-//                    }
 
                 }
                 Resource.Status.ERROR -> {

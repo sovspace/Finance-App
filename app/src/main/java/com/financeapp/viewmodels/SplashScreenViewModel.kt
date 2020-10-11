@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.financeapp.utils.Resource
+import com.financeapp.utils.saveApiCallResource
 import com.financeapp.webservice.AuthenticationService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -16,15 +17,16 @@ class SplashScreenViewModel(private val server: AuthenticationService) : ViewMod
 
     fun getTokenIsValid(): LiveData<Resource<Boolean>> = tokenIsValid
 
-    fun authentificateUser(token: String){
+    fun authenticateUser(token: String){
         viewModelScope.launch(Dispatchers.IO) {
             tokenIsValid.postValue(Resource.loading())
 
-            val response: Response<Unit> = server.authenticateUser(token)
-            if(response.isSuccessful){
+            val responseResource: Resource<Unit> = saveApiCallResource { server.authenticateUser(token) }
+
+            if (responseResource.status == Resource.Status.OK) {
                 tokenIsValid.postValue(Resource.success(true))
             } else {
-                tokenIsValid.postValue(Resource.error(response.message()))
+                tokenIsValid.postValue(Resource.error(responseResource.getMessage()))
             }
 
         }

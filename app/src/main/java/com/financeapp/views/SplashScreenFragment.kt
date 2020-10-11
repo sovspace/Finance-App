@@ -22,7 +22,7 @@ import com.financeapp.webservice.ServiceGenerator
 
 class SplashScreenFragment: Fragment() {
 
-    lateinit var splashScreenFragment: SplashScreenViewModel
+    private lateinit var splashScreenFragment: SplashScreenViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -40,6 +40,7 @@ class SplashScreenFragment: Fragment() {
                 authenticationServer
             )
         ).get(SplashScreenViewModel::class.java)
+
         splashScreenFragment.getTokenIsValid().observe(viewLifecycleOwner){
             when (it.status) {
                 Resource.Status.ERROR -> {
@@ -60,7 +61,7 @@ class SplashScreenFragment: Fragment() {
         val token: String? = sharedPref.getString(SharedPreferencesInfo.tokenName, null)
 
         if (token != null) {
-            splashScreenFragment.authentificateUser(token)
+            splashScreenFragment.authenticateUser(token)
         } else {
             navigationController.navigate(action)
         }

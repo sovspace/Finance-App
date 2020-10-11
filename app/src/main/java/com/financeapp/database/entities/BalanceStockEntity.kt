@@ -8,8 +8,9 @@ import java.sql.*
 @Entity(tableName = "balance_stock")
 class BalanceStockEntity(
 
+    @ColumnInfo(name = "balance_stock_id")
     @PrimaryKey
-    val id: Int,
+    val balanceStockId: Int,
 
     @ColumnInfo(name = "name")
     val name: String,
@@ -24,4 +25,8 @@ class BalanceStockEntity(
     val currentPrice: Double,
 
     @ColumnInfo(name = "last_updated")
-    val lastUpdatedTime: Date)
+    val lastUpdatedTime: Date,
+
+    @ColumnInfo(name = "stock_balance_id")
+    val stockBalanceId: Int
+)

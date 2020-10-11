@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.financeapp.repositories.AuthenticatedRepository
 import com.financeapp.models.User
 import com.financeapp.repositories.UserRepository
 import com.financeapp.utils.Resource

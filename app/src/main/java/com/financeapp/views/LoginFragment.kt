@@ -72,7 +72,7 @@ class LoginFragment : Fragment() {
                         SharedPreferencesInfo.preferencesName,
                         MODE_PRIVATE
                     )
-                    sharedPref.edit().putString(SharedPreferencesInfo.tokenName, it.getData()).apply()
+                    sharedPref.edit().putString(SharedPreferencesInfo.tokenName, it.getData()?.token).apply()
 
                     val goToMainActivity = Intent(
                         requireContext(),
