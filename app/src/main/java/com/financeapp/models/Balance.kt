@@ -15,4 +15,4 @@ data class Balance(
     var currency: Currency,
 
     @SerializedName("last_updated")
-    var lastUpdated: Date)
+    var lastUpdated: Long)

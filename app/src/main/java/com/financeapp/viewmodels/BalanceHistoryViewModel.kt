@@ -6,6 +6,7 @@ import androidx.core.content.FileProvider
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.financeapp.database.FinanceDatabase
 import com.financeapp.models.BalanceHistoryEntry
 import com.financeapp.repositories.BalanceHistoryRepository
 import com.financeapp.utils.Resource
@@ -16,7 +17,7 @@ import java.io.File
 
 class BalanceHistoryViewModel(token: String, val context: Context) : ViewModel() {
 
-    private val authenticatedRepository: BalanceHistoryRepository = BalanceHistoryRepository(token)
+    private val authenticatedRepository: BalanceHistoryRepository = BalanceHistoryRepository(token, FinanceDatabase.getInstance(context).userDao)
     val balanceHistory: MutableLiveData<Resource<List<BalanceHistoryEntry>>> = MutableLiveData()
     val csvUri: MutableLiveData<Resource<Uri>> = MutableLiveData()
 

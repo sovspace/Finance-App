@@ -3,14 +3,13 @@ package com.financeapp.database.entities
 import androidx.room.Embedded
 import androidx.room.Relation
 
-class BalanceUserEntity(
-
+class UserAndBalance(
     @Embedded
     val user: UserEntity,
 
     @Relation(
         parentColumn = "token",
-        entityColumn = "balance_id"
+        entityColumn = "user_token"
     )
     val balance: BalanceEntity
 

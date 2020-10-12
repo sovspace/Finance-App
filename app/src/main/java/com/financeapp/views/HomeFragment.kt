@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.financeapp.viewmodels.HomeViewModel
 import android.content.Context.MODE_PRIVATE
+import android.util.Log
 import androidx.core.widget.ContentLoadingProgressBar
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -41,12 +42,13 @@ class HomeFragment : Fragment() {
         val token = preferences.getString(SharedPreferencesInfo.tokenName, "")
 
         viewModel =
-            ViewModelProvider(requireActivity(),
-                TokenViewModelFactory(token as String)
+            ViewModelProvider(
+                requireActivity(),
+                TokenViewModelFactory(token as String, context)
             ).get(
                 HomeViewModel::class.java
             )
-
+        Log.e("da", "dadada")
         return view
     }
 
@@ -54,7 +56,6 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val recyclerView: RecyclerView = view.findViewById(R.id.stocksList)
-        //recyclerView.addItemDecoration(MarginItemDecoration(10))
         recyclerView.layoutManager =
             LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
         recyclerView.adapter = stockListAdapter

@@ -42,7 +42,7 @@ class BalanceHistoryFragment : Fragment() {
             requireActivity(),
             TokenViewModelFactory(
                 token as String,
-                requireContext()
+                context
             )
         ).get(BalanceHistoryViewModel::class.java)
 

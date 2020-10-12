@@ -20,4 +20,4 @@ class BalanceStock(
     var currentPrice: Double,
 
     @SerializedName("last_updated")
-    var lastUpdatedTime: Date)
+    var lastUpdatedTime: Long)

@@ -1,5 +1,6 @@
 package com.financeapp.repositories
 
+import com.financeapp.database.dao.BalanceDao
 import com.financeapp.models.Balance
 import com.financeapp.utils.Resource
 import com.financeapp.utils.saveApiCallResource
@@ -7,7 +8,7 @@ import com.financeapp.webservice.models.LastUpdatedRequest
 import com.financeapp.webservice.models.SellRequest
 
 
-class BalanceRepository(token:String): BaseActionsRepository(token) {
+class BalanceRepository(token: String, private val balanceDao: BalanceDao): BaseActionsRepository(token) {
 
     suspend fun getBalance() : Resource<Balance> {
         return saveApiCallResource {  authenticateService.getBalance(LastUpdatedRequest(null))}

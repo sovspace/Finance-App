@@ -50,7 +50,7 @@ class SettingsFragment : Fragment() {
         settingsViewModel =
             ViewModelProvider(
                 requireActivity(),
-                TokenViewModelFactory(token as String)
+                TokenViewModelFactory(token as String, context)
             ).get(
                 SettingsViewModel::class.java
             )

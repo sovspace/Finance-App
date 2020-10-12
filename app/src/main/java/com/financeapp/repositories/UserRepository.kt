@@ -1,5 +1,7 @@
 package com.financeapp.repositories
 
+import com.financeapp.database.dao.UserDao
+import com.financeapp.database.entities.UserEntity
 import com.financeapp.models.User
 import com.financeapp.utils.Resource
 import com.financeapp.utils.saveApiCallResource
@@ -10,10 +12,22 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 
-class UserRepository(token: String) : BaseActionsRepository(token) {
+class UserRepository(private val token: String, private val userDao: UserDao) :
+    BaseActionsRepository(token) {
 
     suspend fun getUserInfo(): Resource<User> {
-        return saveApiCallResource { authenticateService.getUserInfo(LastUpdatedRequest(null)) }
+        val userInfo = userDao.getUserInfo(token)
+        val resource = saveApiCallResource { authenticateService.getUserInfo(LastUpdatedRequest(userInfo.lastUpdated)) }
+        val resultResource: Resource<User>
+
+        if (resource.status == Resource.Status.OK) {
+            resultResource = resource
+            userDao.updateUser(UserEntity.getEntity(token, resource.getData() as User))
+        } else {
+            resultResource = Resource.success(User.getFromEntity(userInfo))
+        }
+
+        return resultResource
     }
 
     suspend fun changePassword(currentPassword: String, newPassword: String): Resource<String> {

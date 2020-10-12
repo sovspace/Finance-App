@@ -1,9 +1,11 @@
 package com.financeapp.viewmodels
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.financeapp.database.FinanceDatabase
 import com.financeapp.models.User
 import com.financeapp.repositories.UserRepository
 import com.financeapp.utils.Resource
@@ -11,9 +13,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
-class SettingsViewModel(token: String) : ViewModel() {
+class SettingsViewModel(token: String, context: Context) : ViewModel() {
 
-    private val authenticatedRepository: UserRepository = UserRepository(token)
+    private val authenticatedRepository: UserRepository = UserRepository(token, FinanceDatabase.getInstance(context).userDao)
 
     var avatar = String()
     var currentPassword = String()

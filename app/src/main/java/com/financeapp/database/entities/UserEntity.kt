@@ -3,15 +3,15 @@ package com.financeapp.database.entities
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import androidx.room.Embedded
-import com.financeapp.models.Balance
+import com.financeapp.models.User
 import java.sql.Date
+import java.util.*
 
 
 @Entity(tableName = "user")
 class UserEntity(
 
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     @ColumnInfo(name = "token")
     val token: String,
 
@@ -31,5 +31,17 @@ class UserEntity(
     val avatarUrl: String?,
 
     @ColumnInfo(name = "last_updated")
-    val lastUpdated: Date?
-)
+    val lastUpdated: Long?
+) {
+    companion object {
+        fun getEntity(token: String, user: User) = UserEntity(
+            token,
+            user.userInfo.username,
+            user.userInfo.firstName,
+            user.userInfo.lastName,
+            user.userInfo.email,
+            user.avatarUrl,
+            user.lastUpdated
+        )
+    }
+}

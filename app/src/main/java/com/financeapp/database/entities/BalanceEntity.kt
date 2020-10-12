@@ -9,9 +9,9 @@ import java.util.*
 @Entity(tableName = "balance")
 data class BalanceEntity(
 
-    @ColumnInfo(name = "balance_id")
-    @PrimaryKey(autoGenerate = true)
-    val balanceId: Int,
+    @ColumnInfo(name = "user_token")
+    @PrimaryKey
+    val userToken: String,
 
     @ColumnInfo(name = "amount")
     val amount: Double,
@@ -20,5 +20,5 @@ data class BalanceEntity(
     val currency: String,
 
     @ColumnInfo(name = "last_updated")
-    val lastUpdated: Date
+    val lastUpdated: Long
 )

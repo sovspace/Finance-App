@@ -3,14 +3,14 @@ package com.financeapp.database.dao
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Update
-import com.financeapp.models.BalanceHistoryEntry
+import com.financeapp.database.entities.BalanceHistoryEntryEntity
 
 @Dao
 interface BalanceHistoryEntryDao {
 
     @Insert
-    suspend fun insertBalanceStock(balanceHistoryEntry: BalanceHistoryEntry)
+    suspend fun insertBalanceStock(balanceHistoryEntry: BalanceHistoryEntryEntity)
 
     @Update
-    suspend fun updateBalanceStock(balanceHistoryEntry: BalanceHistoryEntry)
+    suspend fun updateBalanceStock(balanceHistoryEntry: BalanceHistoryEntryEntity)
 }

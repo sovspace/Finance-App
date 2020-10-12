@@ -25,8 +25,8 @@ class BalanceStockEntity(
     val currentPrice: Double,
 
     @ColumnInfo(name = "last_updated")
-    val lastUpdatedTime: Date,
+    val lastUpdatedTime: Long,
 
-    @ColumnInfo(name = "stock_balance_id")
-    val stockBalanceId: Int
+    @ColumnInfo(name = "stock_user_token")
+    val stockUserToken: String
 )

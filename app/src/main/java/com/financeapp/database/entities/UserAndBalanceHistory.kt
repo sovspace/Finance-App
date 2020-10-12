@@ -3,7 +3,7 @@ package com.financeapp.database.entities
 import androidx.room.Embedded
 import androidx.room.Relation
 
-class BalanceHistoryEntity (
+class UserAndBalanceHistory (
     @Embedded
     val user: UserEntity,
 

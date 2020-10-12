@@ -1,6 +1,7 @@
 package com.financeapp.database.dao
 
 import androidx.room.*
+import com.financeapp.database.entities.BalanceAndStocks
 import com.financeapp.database.entities.BalanceEntity
 import com.financeapp.database.entities.BalanceStockEntity
 
@@ -14,8 +15,9 @@ interface BalanceDao {
     @Update
     suspend fun updateBalance(balance: BalanceEntity)
 
-    @Query("SELECT * FROM balance WHERE balance_id = :balanceId")
-    suspend fun getBalanceStocks(balanceId: Int): List<BalanceStockEntity>
+    @Transaction
+    @Query("SELECT * FROM balance WHERE user_token = :userToken")
+    suspend fun getBalanceStocks(userToken: String): BalanceAndStocks
 
 
 }
