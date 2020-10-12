@@ -8,13 +8,13 @@ data class BalanceHistoryEntry(
     var type: String,
 
     @SerializedName("amount")
-    var amount: Double,
+    var amount: Int?,
 
     @SerializedName("total_cost")
     var totalCost: Double,
 
     @SerializedName("stock_name")
-    var stockName: String,
+    var stockName: String?,
 
     @SerializedName("operation_time")
     var operationTime: Date)

@@ -54,7 +54,6 @@ object ServiceGenerator {
     class AuthenticationInterceptor(private val authToken: String) : Interceptor {
         override fun intercept(chain: Interceptor.Chain): okhttp3.Response {
             val original = chain.request()
-            Log.e("token", authToken)
             val builder = original.newBuilder()
                 .header("Authorization", "Token $authToken")
 

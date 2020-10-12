@@ -49,7 +49,7 @@ class BalanceStocksAdapter() : RecyclerView.Adapter<BalanceStocksAdapter.Balance
 
         fun bind(stock: BalanceStock) {
             name.text = stock.name
-            amount.text = "Amount ${stock.amount.format(2)}"
+            amount.text = "Amount ${stock.amount}"
             purchasePrice.text = "Purchase price ${stock.averagePurchasePrice.format(2)}"
             currentPrice.text = "Current price ${stock.currentPrice.format(2)}"
 

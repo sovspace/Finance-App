@@ -9,7 +9,7 @@ class BalanceUserEntity(
     val user: UserEntity,
 
     @Relation(
-        parentColumn = "user_id",
+        parentColumn = "token",
         entityColumn = "balance_id"
     )
     val balance: BalanceEntity

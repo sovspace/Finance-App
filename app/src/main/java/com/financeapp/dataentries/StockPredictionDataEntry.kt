@@ -17,7 +17,7 @@ class StockPredictionDataEntry(data: String,
         setValue("lowerPrice", lowerPrice)
     }
     companion object{
-        fun Predictions(entries: Array<StockPredictionEntry>): ArrayList<DataEntry>{
+        fun predictions(entries: Array<StockPredictionEntry>): ArrayList<DataEntry>{
             val dataEntries = ArrayList<DataEntry>()
             val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
             for (entry in entries){

@@ -11,7 +11,7 @@ class BalanceStock(
     var name: String,
 
     @SerializedName("amount")
-    var amount: Double,
+    var amount: Int,
 
     @SerializedName("purchase_price")
     var averagePurchasePrice: Double,

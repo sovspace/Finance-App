@@ -5,11 +5,11 @@ import androidx.room.Relation
 
 class BalanceHistoryEntity (
     @Embedded
-    val balance: BalanceEntity,
+    val user: UserEntity,
 
     @Relation(
-        parentColumn = "balance_id",
-        entityColumn = "history_balance_id"
+        parentColumn = "token",
+        entityColumn = "user_token"
     )
 
     val history: List<BalanceHistoryEntryEntity>

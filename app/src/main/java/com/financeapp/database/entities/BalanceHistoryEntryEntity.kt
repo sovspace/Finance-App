@@ -13,16 +13,19 @@ class BalanceHistoryEntryEntity (
     @ColumnInfo(name = "type")
     val type: String,
 
+    @ColumnInfo(name = "stock_name")
+    val stockName: String?,
+
     @ColumnInfo(name = "total_cost")
     val totalCost: Double,
 
-    @ColumnInfo(name = "stock_name")
-    val stockName: Double,
+    @ColumnInfo(name = "total_cost")
+    val amount: Int?,
 
     @ColumnInfo(name = "operation_time")
     val operationTime: Date,
 
-    @ColumnInfo(name = "history_balance_id")
-    val balanceId: Int
+    @ColumnInfo(name = "user_token")
+    val userToken: Int
 
 )

@@ -45,14 +45,26 @@ class BalanceHistoryAdapter() : RecyclerView.Adapter<BalanceHistoryAdapter.Balan
 
         private val operationTime: TextView = itemView.findViewById(R.id.operationTime)
 
-        @SuppressLint("SetTextI18n", "DefaultLocale")
+        @SuppressLint("SetTextI18n")
         fun bind(entry: BalanceHistoryEntry) {
             entry.also {
                 type.text = it.type.capitalize()
-                amount.text = "Amount ${it.amount.format(2)}"
                 totalCost.text = "Total cost ${it.totalCost.format(2)}"
-                stockName.text = it.stockName
+
+                if (it.amount != null) {
+                    amount.text = "Amount ${it.amount}"
+                } else {
+                    amount.visibility = TextView.INVISIBLE
+                }
+
+                if (it.stockName != null) {
+                    stockName.text = it.stockName
+                } else {
+                    stockName.visibility = TextView.INVISIBLE
+                }
+
                 val formatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", getDefault())
+                formatter.timeZone = TimeZone.getDefault()
                 operationTime.text = formatter.format(it.operationTime)
             }
 

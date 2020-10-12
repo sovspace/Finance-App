@@ -53,7 +53,7 @@ class StocksViewModel(token: String) : ViewModel() {
 
         val dataHistory = StockHistoryDataEntry.history(stockInfo.value!!.getData()!!.history)
         val dataPredictions =
-            StockPredictionDataEntry.Predictions(stockInfo.value!!.getData()!!.predictions)
+            StockPredictionDataEntry.predictions(stockInfo.value!!.getData()!!.predictions)
 
         val setHistory = Set.instantiate()
         setHistory.data(dataHistory)
