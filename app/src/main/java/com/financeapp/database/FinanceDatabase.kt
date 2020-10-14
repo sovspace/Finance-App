@@ -15,7 +15,7 @@ import com.financeapp.database.entities.*
 @Database(
     entities = [BalanceEntity::class, BalanceHistoryEntryEntity::class, BalanceStockEntity::class,
         UserEntity::class],
-    version = 1,
+    version = 3,
     exportSchema = false
 )
 @TypeConverters(DateConverters::class)

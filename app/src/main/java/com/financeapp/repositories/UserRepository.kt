@@ -1,5 +1,6 @@
 package com.financeapp.repositories
 
+import android.util.Log
 import com.financeapp.database.dao.UserDao
 import com.financeapp.database.entities.UserEntity
 import com.financeapp.models.User
@@ -16,18 +17,28 @@ class UserRepository(private val token: String, private val userDao: UserDao) :
     BaseActionsRepository(token) {
 
     suspend fun getUserInfo(): Resource<User> {
-        val userInfo = userDao.getUserInfo(token)
-        val resource = saveApiCallResource { authenticateService.getUserInfo(LastUpdatedRequest(userInfo.lastUpdated)) }
-        val resultResource: Resource<User>
+        val userEntity = userDao.getUserInfo(token)
+        val webServiceResource =
+            saveApiCallResource { authenticateService.getUserInfo(LastUpdatedRequest(userEntity?.lastUpdated)) }
 
-        if (resource.status == Resource.Status.OK) {
-            resultResource = resource
-            userDao.updateUser(UserEntity.getEntity(token, resource.getData() as User))
-        } else {
-            resultResource = Resource.success(User.getFromEntity(userInfo))
+        return when (webServiceResource.status) {
+            Resource.Status.OK -> {
+                if (webServiceResource.getData() == null) {
+                    Resource.success(User.getFromEntity(userEntity as UserEntity))
+                } else {
+                    userDao.insertUser(UserEntity.getEntity(token, webServiceResource.getData() as User))
+                    Resource.success(webServiceResource.getData())
+                }
+            }
+            Resource.Status.ERROR -> {
+                if (userEntity == null) {
+                    Resource.error("No information available")
+                } else {
+                    Resource.success(User.getFromEntity(userEntity))
+                }
+            }
+            Resource.Status.LOADING -> Resource.loading()
         }
-
-        return resultResource
     }
 
     suspend fun changePassword(currentPassword: String, newPassword: String): Resource<String> {

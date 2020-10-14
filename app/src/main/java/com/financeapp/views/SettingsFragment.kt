@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
@@ -13,10 +14,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
+import com.example.picassodemo.CircleTransform
 import com.financeapp.utils.Resource
 import com.financeapp.viewmodels.factories.TokenViewModelFactory
 import com.financeapp.utils.FilePath
-import com.financeapp.utils.SharedPreferencesInfo
+import com.financeapp.utils.Constants
 import com.financeapp.viewmodels.SettingsViewModel
 import com.financeapp.views.databinding.SettingsFragmentBinding
 import com.squareup.picasso.Picasso
@@ -27,7 +29,7 @@ import es.dmoral.toasty.Toasty
 
 class SettingsFragment : Fragment() {
 
-    lateinit var settingsViewModel: SettingsViewModel
+    private lateinit var settingsViewModel: SettingsViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,10 +44,10 @@ class SettingsFragment : Fragment() {
             R.layout.settings_fragment, container, false
         )
         val preferences = requireActivity().getSharedPreferences(
-            SharedPreferencesInfo.preferencesName,
+            Constants.preferencesName,
             Context.MODE_PRIVATE
         )
-        val token = preferences.getString(SharedPreferencesInfo.tokenName, "")
+        val token = preferences.getString(Constants.tokenName, "")
 
         settingsViewModel =
             ViewModelProvider(
@@ -65,7 +67,7 @@ class SettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val button: ImageButton = view.findViewById(R.id.changeAvatar)
+        val button: Button = view.findViewById(R.id.pickAvatarButton)
         val progressBar: ContentLoadingProgressBar = view.findViewById(R.id.progressBarSettings)
 
 
@@ -77,9 +79,8 @@ class SettingsFragment : Fragment() {
 
                     Picasso.with(context)
                         .load(it.uri)
-                        .centerCrop()
-                        .fit()
-                        .into(button)
+                        .transform(CircleTransform())
+                        .into(view.findViewById<ImageView>(R.id.changeAvatarImage))
 
                 }.show(requireActivity())
         }
@@ -92,8 +93,7 @@ class SettingsFragment : Fragment() {
 
                     Picasso.with(context)
                         .load(it.getData()?.avatarUrl)
-                        .centerCrop()
-                        .fit()
+                        .transform(CircleTransform())
                         .into(view.findViewById<ImageView>(R.id.avatar))
 
                     val usernameTextView: TextView = view.findViewById(R.id.usernameText)

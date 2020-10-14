@@ -16,7 +16,7 @@ import androidx.navigation.fragment.findNavController
 import com.financeapp.activities.MainActivity
 import com.financeapp.utils.Resource
 import com.financeapp.viewmodels.factories.ServerViewModelFactory
-import com.financeapp.utils.SharedPreferencesInfo
+import com.financeapp.utils.Constants
 import com.financeapp.viewmodels.LoginViewModel
 import com.financeapp.views.databinding.LoginFragmentBinding
 import com.financeapp.webservice.AuthenticationService
@@ -69,10 +69,10 @@ class LoginFragment : Fragment() {
                 Resource.Status.OK -> {
                     progressBar.hide()
                     val sharedPref: SharedPreferences = requireActivity().getSharedPreferences(
-                        SharedPreferencesInfo.preferencesName,
+                        Constants.preferencesName,
                         MODE_PRIVATE
                     )
-                    sharedPref.edit().putString(SharedPreferencesInfo.tokenName, it.getData()?.token).apply()
+                    sharedPref.edit().putString(Constants.tokenName, it.getData()?.token).apply()
 
                     val goToMainActivity = Intent(
                         requireContext(),

@@ -26,6 +26,15 @@ class MainActivity : AppCompatActivity(){
         val toolbar = findViewById<Toolbar>(R.id.mainActivityToolbar)
         toolbar.setupWithNavController(navController, appBarConfiguration)
 
+        navController.addOnDestinationChangedListener{ controller, destination, arguments ->
+            if (destination.id == R.id.balanceHistoryFragment) {
+                toolbar.inflateMenu(R.menu.balance_history_toolbar)
+            } else {
+                toolbar.menu.clear()
+            }
+
+
+        }
     }
 
 }

@@ -36,10 +36,10 @@ class HomeFragment : Fragment() {
         val view = inflater.inflate(R.layout.home_fragment, container, false)
 
         val preferences = requireActivity().getSharedPreferences(
-            SharedPreferencesInfo.preferencesName,
+            Constants.preferencesName,
             MODE_PRIVATE
         )
-        val token = preferences.getString(SharedPreferencesInfo.tokenName, "")
+        val token = preferences.getString(Constants.tokenName, "")
 
         viewModel =
             ViewModelProvider(
@@ -48,7 +48,6 @@ class HomeFragment : Fragment() {
             ).get(
                 HomeViewModel::class.java
             )
-        Log.e("da", "dadada")
         return view
     }
 
@@ -92,7 +91,7 @@ class HomeFragment : Fragment() {
                         balance?.let {
                             progressBar.visibility = View.INVISIBLE
 
-                            stockListAdapter.refreshBalanceStocks(it!!.stocks)
+                            stockListAdapter.refreshBalanceStocks(it.stocks)
 
                             view.balanceText.text = "Balance " + it.amount.format(2)
                             view.currencyText.text = "Currency " + it.currency.toString()

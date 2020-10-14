@@ -1,7 +1,8 @@
 package com.financeapp.models
 
+import com.financeapp.database.entities.BalanceEntity
+import com.financeapp.database.entities.BalanceStockEntity
 import com.google.gson.annotations.SerializedName
-import java.util.*
 
 data class Balance(
 
@@ -12,7 +13,17 @@ data class Balance(
     var stocks: List<BalanceStock>,
 
     @SerializedName("currency")
-    var currency: Currency,
+    var currency: String,
 
     @SerializedName("last_updated")
-    var lastUpdated: Long)
+    var lastUpdated: Long){
+    companion object{
+        fun getFromEntity(balanceEntity: BalanceEntity, balanceStockEntities: List<BalanceStockEntity>): Balance {
+            val balanceStocks = ArrayList<BalanceStock>()
+            for (entity in balanceStockEntities) {
+                balanceStocks.add(BalanceStock.getFromEntity(entity))
+            }
+            return Balance(balanceEntity.amount, balanceStocks, balanceEntity.currency, balanceEntity.lastUpdated)
+        }
+    }
+}

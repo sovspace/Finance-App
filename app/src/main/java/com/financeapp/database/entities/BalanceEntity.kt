@@ -3,6 +3,7 @@ package com.financeapp.database.entities
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.financeapp.models.Balance
 import java.util.*
 
 
@@ -21,4 +22,10 @@ data class BalanceEntity(
 
     @ColumnInfo(name = "last_updated")
     val lastUpdated: Long
-)
+) {
+    companion object{
+        fun getEntity(token: String, balance: Balance): BalanceEntity {
+            return BalanceEntity(token, balance.amount, balance.currency, balance.lastUpdated)
+        }
+    }
+}

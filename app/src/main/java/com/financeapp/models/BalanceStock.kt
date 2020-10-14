@@ -1,5 +1,6 @@
 package com.financeapp.models
 
+import com.financeapp.database.entities.BalanceStockEntity
 import com.google.gson.annotations.SerializedName
 import java.util.*
 
@@ -20,4 +21,18 @@ class BalanceStock(
     var currentPrice: Double,
 
     @SerializedName("last_updated")
-    var lastUpdatedTime: Long)
+    var lastUpdatedTime: Long){
+
+    companion object{
+        fun getFromEntity(balanceStockEntity: BalanceStockEntity): BalanceStock{
+            return BalanceStock(
+                balanceStockEntity.balanceStockId,
+                balanceStockEntity.name,
+                balanceStockEntity.amount,
+                balanceStockEntity.averagePurchasePrice,
+                balanceStockEntity.currentPrice,
+                balanceStockEntity.lastUpdatedTime
+            )
+        }
+    }
+}

@@ -1,7 +1,6 @@
 package com.financeapp.views
 
 import android.content.Context
-import android.opengl.Visibility
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +13,7 @@ import androidx.lifecycle.observe
 import androidx.lifecycle.ViewModelProvider
 import com.financeapp.utils.Resource
 import com.financeapp.viewmodels.factories.TokenViewModelFactory
-import com.financeapp.utils.SharedPreferencesInfo
+import com.financeapp.utils.Constants
 import com.financeapp.viewmodels.BuyStocksViewModel
 import com.financeapp.views.databinding.BuyStocksFragmentBinding
 import es.dmoral.toasty.Toasty
@@ -28,10 +27,10 @@ class BuyStocksFragment : Fragment(){
         super.onCreateView(inflater, container, savedInstanceState)
 
         val preferences = requireActivity().getSharedPreferences(
-            SharedPreferencesInfo.preferencesName,
+            Constants.preferencesName,
             Context.MODE_PRIVATE
         )
-        val token = preferences.getString(SharedPreferencesInfo.tokenName, "")
+        val token = preferences.getString(Constants.tokenName, "")
 
         viewModel = ViewModelProvider(requireActivity(),
             TokenViewModelFactory(token as String)

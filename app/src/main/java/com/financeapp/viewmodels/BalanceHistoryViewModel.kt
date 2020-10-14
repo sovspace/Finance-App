@@ -17,7 +17,8 @@ import java.io.File
 
 class BalanceHistoryViewModel(token: String, val context: Context) : ViewModel() {
 
-    private val authenticatedRepository: BalanceHistoryRepository = BalanceHistoryRepository(token, FinanceDatabase.getInstance(context).userDao)
+    private val authenticatedRepository: BalanceHistoryRepository =
+        BalanceHistoryRepository(token, FinanceDatabase.getInstance(context).balanceDao)
     val balanceHistory: MutableLiveData<Resource<List<BalanceHistoryEntry>>> = MutableLiveData()
     val csvUri: MutableLiveData<Resource<Uri>> = MutableLiveData()
 
@@ -34,7 +35,7 @@ class BalanceHistoryViewModel(token: String, val context: Context) : ViewModel()
 
     fun getBalanceHistoryCsv() {
         this.viewModelScope.launch(Dispatchers.IO) {
-            csvUri.value = Resource.loading()
+            csvUri.postValue(Resource.loading())
             val resourceCsv = authenticatedRepository.getBalanceHistoryCsv()
 
             if (resourceCsv.status == Resource.Status.OK) {
@@ -43,15 +44,17 @@ class BalanceHistoryViewModel(token: String, val context: Context) : ViewModel()
 
                 val file = File(context.cacheDir, tempFileName)
                 file.writeBytes(resourceCsv.getData()!!.toByteArray())
-                csvUri.value = Resource.success(
-                    FileProvider.getUriForFile(
-                        context,
-                        context.applicationContext.packageName + ".provider",
-                        file
+                csvUri.postValue(
+                    Resource.success(
+                        FileProvider.getUriForFile(
+                            context,
+                            context.applicationContext.packageName + ".provider",
+                            file
+                        )
                     )
                 )
             } else {
-                csvUri.value = Resource.error(resourceCsv.getMessage())
+                csvUri.postValue(Resource.error(resourceCsv.getMessage()))
             }
         }
     }

@@ -12,9 +12,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.financeapp.adapters.BalanceHistoryAdapter
 import com.financeapp.utils.Resource
 import com.financeapp.viewmodels.factories.TokenViewModelFactory
-import com.financeapp.utils.SharedPreferencesInfo
+import com.financeapp.utils.Constants
 import com.financeapp.viewmodels.BalanceHistoryViewModel
 import android.content.Intent
+import androidx.appcompat.widget.Toolbar
 import es.dmoral.toasty.Toasty
 
 
@@ -33,10 +34,10 @@ class BalanceHistoryFragment : Fragment() {
         val view = inflater.inflate(R.layout.balance_history_fragment, container, false)
 
         val preferences = requireActivity().getSharedPreferences(
-            SharedPreferencesInfo.preferencesName,
+            Constants.preferencesName,
             Context.MODE_PRIVATE
         )
-        val token = preferences.getString(SharedPreferencesInfo.tokenName, "")
+        val token = preferences.getString(Constants.tokenName, "")
 
         viewModel = ViewModelProvider(
             requireActivity(),
@@ -45,16 +46,12 @@ class BalanceHistoryFragment : Fragment() {
                 context
             )
         ).get(BalanceHistoryViewModel::class.java)
-
-        setHasOptionsMenu(true)
-
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         view.findViewById<RecyclerView>(R.id.stocksList).apply {
-            //addItemDecoration(MarginItemDecoration(15))
             layoutManager =
                 LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
             adapter = balanceHistoryAdapter
@@ -62,12 +59,11 @@ class BalanceHistoryFragment : Fragment() {
 
         val progressBar: ContentLoadingProgressBar = view.findViewById(R.id.progressBarHistory)
 
-
-        viewModel.balanceHistory.observe(viewLifecycleOwner) {
-            when (it.status) {
+        viewModel.balanceHistory.observe(viewLifecycleOwner) { resource ->
+            when (resource.status) {
                 Resource.Status.OK -> {
                     progressBar.hide()
-                    val balance = it.getData()
+                    val balance = resource.getData()
                     balance?.let {
                         progressBar.visibility = View.INVISIBLE
                         balanceHistoryAdapter.refreshBalanceHistory(it)
@@ -75,22 +71,27 @@ class BalanceHistoryFragment : Fragment() {
                 }
                 Resource.Status.ERROR -> {
                     progressBar.hide()
-                    Toasty.error(requireContext(), it.getMessage() as String).show()
+                    Toasty.error(requireContext(), resource.getMessage() as String).show()
                 }
                 Resource.Status.LOADING -> progressBar.show()
             }
         }
 
         viewModel.getBalanceHistory()
+
+        val toolbar = requireActivity().findViewById<Toolbar>(R.id.mainActivityToolbar)
+        toolbar.setOnMenuItemClickListener {item -> onMenuItemClickListener(item)}
+
     }
 
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.balance_history_toolbar, menu)
         super.onCreateOptionsMenu(menu, inflater)
+
+        inflater.inflate(R.menu.balance_history_toolbar, menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    private fun onMenuItemClickListener(item: MenuItem): Boolean {
         val id = item.itemId
 
         if (id == R.id.emailButton) {

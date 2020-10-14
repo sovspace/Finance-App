@@ -11,7 +11,7 @@ import androidx.lifecycle.observe
 import com.anychart.AnyChartView
 import com.financeapp.utils.Resource
 import com.financeapp.viewmodels.factories.TokenViewModelFactory
-import com.financeapp.utils.SharedPreferencesInfo
+import com.financeapp.utils.Constants
 import com.financeapp.viewmodels.StocksViewModel
 import com.financeapp.views.databinding.StocksFragmentBinding
 import es.dmoral.toasty.Toasty
@@ -33,10 +33,10 @@ class StocksFragment : Fragment() {
             R.layout.stocks_fragment, container, false
         )
         val preferences = requireActivity().getSharedPreferences(
-            SharedPreferencesInfo.preferencesName,
+            Constants.preferencesName,
             Context.MODE_PRIVATE
         )
-        val token = preferences.getString(SharedPreferencesInfo.tokenName, "")
+        val token = preferences.getString(Constants.tokenName, "")
 
         viewModel = ViewModelProvider(requireActivity(),
             TokenViewModelFactory(token as String)

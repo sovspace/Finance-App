@@ -20,7 +20,7 @@
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.financeapp.views.SettingsFragment"
-        android:label="Setings"
+        android:label="Settings"
         tools:layout="@layout/settings_fragment"/>
 
     <fragment

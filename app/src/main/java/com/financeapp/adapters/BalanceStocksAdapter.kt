@@ -8,11 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.financeapp.models.BalanceStock
 import com.financeapp.utils.format
 import com.financeapp.views.R
-import java.text.FieldPosition
-import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 
-class BalanceStocksAdapter() : RecyclerView.Adapter<BalanceStocksAdapter.BalanceStockHolder>() {
+class BalanceStocksAdapter : RecyclerView.Adapter<BalanceStocksAdapter.BalanceStockHolder>() {
 
     private var balanceStocks: List<BalanceStock> = ArrayList()
 
@@ -49,12 +49,12 @@ class BalanceStocksAdapter() : RecyclerView.Adapter<BalanceStocksAdapter.Balance
 
         fun bind(stock: BalanceStock) {
             name.text = stock.name
-            amount.text = "Amount ${stock.amount}"
+            amount.text = "Amount " + stock.amount
             purchasePrice.text = "Purchase price ${stock.averagePurchasePrice.format(2)}"
             currentPrice.text = "Current price ${stock.currentPrice.format(2)}"
 
-            val formatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-            lastUpdatedTime.text = formatter.format(stock.lastUpdatedTime)
+            lastUpdatedTime.text = Date(stock.lastUpdatedTime * 1000).toString()
+
 
         }
     }

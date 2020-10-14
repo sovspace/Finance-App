@@ -14,7 +14,7 @@ import androidx.navigation.fragment.findNavController
 import com.financeapp.activities.MainActivity
 import com.financeapp.utils.Resource
 import com.financeapp.viewmodels.factories.ServerViewModelFactory
-import com.financeapp.utils.SharedPreferencesInfo
+import com.financeapp.utils.Constants
 import com.financeapp.viewmodels.SplashScreenViewModel
 import com.financeapp.webservice.AuthenticationService
 import com.financeapp.webservice.ServiceGenerator
@@ -55,10 +55,10 @@ class SplashScreenFragment: Fragment() {
 
 
         val sharedPref: SharedPreferences = requireActivity().getSharedPreferences(
-            SharedPreferencesInfo.preferencesName,
+            Constants.preferencesName,
             Context.MODE_PRIVATE
         )
-        val token: String? = sharedPref.getString(SharedPreferencesInfo.tokenName, null)
+        val token: String? = sharedPref.getString(Constants.tokenName, null)
 
         if (token != null) {
             splashScreenFragment.authenticateUser(token)

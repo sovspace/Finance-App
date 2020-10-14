@@ -35,5 +35,6 @@
     <string name="refill">Refill</string>
     <string name="first_name">First name</string>
     <string name="last_name">Last name</string>
+    <string name="pick">Pick</string>
 
 </resources>
